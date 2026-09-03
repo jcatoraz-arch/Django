@@ -14,6 +14,53 @@ Tambien se utilizo la consola interactiva de Django mediante python manage.py sh
 Posteriormente se creo un superusuario para poder ingresar al panel de administracion de Django. Desde el administrador se pudieron crear, modificar y eliminar preguntas. Tambien se configuro el archivo admin.py para que las opciones aparecieran dentro de cada pregunta mediante un sistema de opciones inline.
 Finalmente, se personalizo el panel de administracion utilizando list_display para mostrar informacion de las preguntas, list_filter para poder filtrarlas por fecha y search_fields para buscar preguntas por su texto. De esta forma, el administrador de Django quedo mas organizado y facil de utilizar.
 
+PARTE 3 TUTORIAL:
+
+En la Parte 3 del tutorial se comenzo a trabajar principalmente con las vistas, las URLs y los templates de Django. Las vistas son funciones de Python que se encargan de recibir las solicitudes de los usuarios y devolver una respuesta. En la aplicacion polls se crearon diferentes vistas para mostrar las preguntas, los detalles de una pregunta, sus resultados y la votacion.
+Despues se configuraron las URLs en el archivo urls.py para relacionar cada direccion con una vista determinada. Se utilizaron parametros como int:question_id para obtener el identificador de una pregunta directamente desde la URL. De esta manera, cuando un usuario ingresa a una direccion como /polls/1/, Django puede identificar el numero de la pregunta y ejecutar la vista correspondiente.
+Tambien se comenzo a utilizar el sistema de templates de Django para separar el codigo de Python de la parte visual de la pagina. Para esto se creo la carpeta templates dentro de la aplicacion polls y dentro de ella otra carpeta llamada polls. Luego se crearon los archivos index.html, detail.html, results.html y vote.html. Estos archivos permiten mostrar la informacion de las preguntas utilizando HTML y las herramientas de templates de Django.
+En el archivo index.html se utilizo {% for %} para recorrer las preguntas y {{ question.question_text }} para mostrar el texto de cada una. Tambien se utilizo {% if %} para comprobar si existen preguntas disponibles. Desde la vista index se obtienen las ultimas cinco preguntas de la base de datos y se envian al template mediante un diccionario llamado context.
+Tambien se aprendio a utilizar la funcion render(), que permite cargar un template, enviarle informacion y devolver el resultado al navegador de una manera mas sencilla. Para la vista detail se utilizo get_object_or_404(), que permite buscar una pregunta por su identificador y mostrar un error 404 si la pregunta no existe.
+Finalmente, se modificaron los enlaces de las paginas para no tener URLs escritas directamente en el HTML. Se utilizo la etiqueta {% url %} junto con los nombres definidos en urls.py. Tambien se agrego un namespace llamado polls para evitar conflictos entre las URLs de diferentes aplicaciones. De esta forma, la aplicacion quedo organizada separando las URLs, la logica de las vistas y la parte visual mediante templates.
+
+PARTE 4 TUTORIAL:
+
+Esta parte fue mas corta. En esta aprendimos a crear formularios para que los usuarios puedan votar en las encuestas. Modificamos detail.html para mostrar las opciones y permitir seleccionar una mediante botones.
+Tambien modificamos views.py para utilizar vistas genericas de Django y creamos la funcion vote, que recibe la opcion elegida y aumenta la cantidad de votos.
+Por ultimo, modificamos results.html para mostrar los resultados de cada encuesta y la cantidad de votos obtenidos por cada opcion.
+Con estos cambios, nuestra aplicacion permite seleccionar una respuesta, votar y ver los resultados.
+
+PARTE 5 TUTORIAL:
+
+En la parte 5 del tutorial de Django aprendi a realizar pruebas automaticas para comprobar que la aplicacion funciona correctamente. Las pruebas sirven para encontrar errores y verificar que los cambios realizados en el codigo no rompan otras partes de la aplicacion.
+Primero cree pruebas para comprobar el funcionamiento de las vistas y de las preguntas. Tambien aprendi a utilizar el sistema de tests que trae Django, que permite ejecutar varias pruebas automaticamente desde la terminal.
+Para ejecutar las pruebas utilice el comando python manage.py test polls. Django se encarga de buscar las pruebas dentro de la aplicacion polls, ejecutarlas y mostrar en la terminal si fueron aprobadas o si se encontraron errores.
+Durante esta parte tambien aprendi que es importante realizar pruebas antes y despues de modificar el codigo, ya que de esta forma podemos detectar problemas mas facilmente.
+En conclusion, la parte 5 me sirvio para aprender como crear y ejecutar pruebas automaticas en Django y entender la importancia de comprobar que una aplicacion funcione correctamente antes de continuar desarrollandola.
+
+PARTE 6 TUTORIAL:
+
+En la parte 6 del tutorial de Django aprendi a trabajar con archivos estaticos, como archivos CSS e imagenes, que sirven para mejorar la apariencia de una pagina web.
+Primero cree una carpeta llamada static dentro de la aplicacion polls. Dentro de ella cree otra carpeta llamada polls y agregue el archivo style.css. En este archivo agregue un codigo para cambiar el color de los enlaces de las preguntas a verde.
+Despues modifique el archivo index.html para indicarle a Django que utilizara los archivos estaticos. Para eso agregue la etiqueta {% load static %} y vincule la hoja de estilos usando {% static 'polls/style.css' %}.
+Luego reinicie el servidor y actualice la pagina para comprobar que los enlaces aparecieran en color verde. Esto permitio verificar que el archivo CSS estaba funcionando correctamente.
+Tambien aprendi a agregar una imagen como fondo de la pagina. Para hacerlo cree una carpeta llamada images dentro de polls/static/polls/ y coloque una imagen llamada background.png. Luego agregue en el archivo style.css el codigo necesario para mostrarla como fondo.
+Con esta parte aprendi como Django organiza y utiliza los archivos estaticos, como CSS e imagenes. Tambien aprendi que es importante organizar estos archivos dentro de carpetas con el nombre de la aplicacion para evitar problemas cuando existen archivos con el mismo nombre en diferentes aplicaciones.
+
+PARTE 7 TUTORIAL:
+
+En la Parte 7 del tutorial de Django nos enfocamos en personalizar y optimizar el sitio de administracion generado automaticamente, el cual habiamos explorado de forma basica en la Parte 2. En primer lugar, aprendimos a personalizar los formularios del panel de administracion creando clases que heredan de admin.ModelAdmin. Mediante la propiedad fields reordenamos la disposicion de los campos de entrada, y con fieldsets logramos dividir el formulario en secciones con titulos propios, e incluso agregar opciones avanzadas como esconder secciones extensas usando la clase collapse.
+Posteriormente, abordamos como administrar modelos relacionados en un mismo lugar. En vez de agregar las opciones de una encuesta (Choice) de forma independiente desde una pantalla separada, implementamos clases inline como StackedInline y posteriormente TabularInline. Esta ultima resulto ser mucho mas eficiente y compacta, permitiendo agregar, editar o eliminar varias opciones directamente desde la misma pantalla de edicion de la pregunta (Question).
+Tambien se realizaron mejoras significativas en la lista de cambio (change list), que es la tabla que muestra todos los registros existentes. Con la opcion list_display se especifico que campos o metodos mostrar como columnas en la tabla, incluyendo la funcion personalizada was_published_recently. Para mejorar el aspecto de dicha columna, aplicamos el decorador @admin.display en el modelo, lo que nos permitio definir un titulo descriptivo para la columna, ordenar los resultados por fecha y mostrar un icono booleano (check o cruz). Adicionalmente, agregamos filtros laterales segun la fecha con list_filter y un buscador funcional mediante search_fields.
+Por ultimo, aprendimos a personalizar el aspecto visual global del panel de administracion haciendo uso del sistema de templates de Django. Modificamos la configuracion TEMPLATES en el archivo settings.py especificando el directorio de plantillas del proyecto. Luego, copiamos la plantilla predeterminada del administrador (admin/base_site.html) a nuestra carpeta de plantillas y sobrescribimos el bloque del encabezado para reemplazar el texto por defecto ("Django administration") por un titulo propio ("Polls Administration"). De esta forma, comprendimos como se pueden sobrescribir las plantillas del sistema sin modificar el codigo fuente de Django.
+
+PARTE 8 TUTORIAL:
+
+En la Parte 8 finalizamos la serie de tutoriales iniciales explorando el ecosistema de paquetes de terceros, una de las mayores fortalezas de Django para ampliar funcionalidades rapidamente. Aprendimos que la comunidad ofrece una enorme variedad de librerias mantenidas por desarrolladores independientes y organizaciones comunitarias.
+En esta leccion integramos Django Debug Toolbar, uno de los paquetes de terceros mas utilizados segun las encuestas de desarrolladores. Realizamos la instalacion del paquete dentro del entorno virtual utilizando el gestor de paquetes pip mediante el comando python -m pip install django-debug-toolbar.
+Comprendimos que los paquetes de terceros requieren ciertos pasos de configuracion posterior para integrarse al proyecto, tales como registrarlos en la lista INSTALLED_APPS de settings.py y vincular sus rutas en el archivo urls.py. Tras completar la instalacion, pudimos visualizar la barra flotante de depuracion (DjDT) al navegar por la interfaz de administracion. Esta barra nos brinda diferentes paneles con informacion detallada sobre cada peticion y respuesta, tiempos de ejecucion, consultas SQL realizadas a la base de datos y plantillas cargadas.
+Finalmente, revisamos opciones de resolucion de problemas e investigacion de errores, aprendiendo a consultar las guias de solucion de problemas de los paquetes, su rastreador de issues en GitHub y espacios comunitarios como el Foro de Django o Discord. Asimismo, se presento la plataforma Django Packages como una herramienta util para descubrir, comparar y evaluar si un paquete de terceros esta bien mantenido y listo para produccion antes de utilizarlo en un proyecto real.
+
 PREGUNTAS TEORICAS RESUELTAS:
 
 1- Django es un framework web de Python que se utiliza para desarrollar sitios y aplicaciones web. Lo usariamos porque proporciona muchas herramientas ya preparadas para trabajar con URLs, vistas, modelos, bases de datos, usuarios y administracion, permitiendo desarrollar aplicaciones de forma mas rapida y organizada.
