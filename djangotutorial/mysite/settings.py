@@ -38,7 +38,7 @@ ROOT_URLCONF = "mysite.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],  # Parte 7
+        'DIRS': [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -71,7 +71,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
-
+    
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Configuración de Debug Toolbar (Parte 8)

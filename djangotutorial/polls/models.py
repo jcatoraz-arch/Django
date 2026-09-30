@@ -29,3 +29,11 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+class Post(models.Model):
+    titulo = models.CharField(max_length=200)
+    contenido = models.TextField()
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo

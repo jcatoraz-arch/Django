@@ -1,0 +1,857 @@
+/* la parte general que luego la llamo en las diferentes secciones y en el uso de colores */
+
+:root {
+    --fondo: #050505;
+    --fondo-secundario: #0a0a0a;
+    --blanco: #f5f5f5;
+    --gris: #999;
+    --gris-oscuro: #222;
+    --azul: #38bdf8;
+    --borde: rgba(255, 255, 255, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--fondo);
+    color: var(--blanco);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* el cursor */
+/* este es el cursor personalizado que hice para darle un efecto diferente a la pagina */
+
+.cursor-xray {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--azul);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    background: rgba(56, 189, 248, 0.08);
+    backdrop-filter: invert(1) contrast(1.2);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5), 0 0 35px rgba(56, 189, 248, 0.2);
+}
+
+.cursor-xray::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, transparent 30%, rgba(56, 189, 248, 0.15), transparent 70%);
+    animation: xrayBrillo 2s linear infinite;
+}
+
+@keyframes xrayBrillo {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+/* barrita de scroll */
+/* esta barra muestra cuánto de la página recorri */
+.barra-scroll {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    z-index: 9998;
+}
+
+.progreso-scroll {
+    width: 100%;
+    height: 0%;
+    background: var(--azul);
+    border-radius: 10px;
+}
+
+
+/* el header HEADER ================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 50px;
+    z-index: 1000;
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--borde);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+.logo span,
+.header-status span,
+.hero-texto h1 span,
+.section-header h2 span,
+.contacto-contenido h2 span,
+.footer-right span {
+    color: var(--azul);
+}
+
+.nav {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+}
+
+.nav-link {
+    color: var(--gris);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--blanco);
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gris);
+    text-transform: uppercase;
+}
+
+.header-status span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 10px #4ade80;
+}
+
+
+/* el hero */
+/* esta parte le da la forma y el estilo principal al inicio */
+
+#inicio {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 120px 8% 60px;
+    overflow: hidden;
+}
+
+.hero-grid,
+.personaje-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+.hero-contenido {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-numero,
+.section-numero,
+.mini-titulo,
+.proyecto-tipo {
+    font-size: 12px;
+    color: var(--azul);
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.hero-texto h1 {
+    font-size: clamp(60px, 9vw, 150px);
+    line-height: 0.85;
+    letter-spacing: -7px;
+    margin: 25px 0;
+    font-weight: 700;
+}
+
+.hero-texto h1 span {
+    display: block;
+}
+
+.hero-linea {
+    width: 100%;
+    height: 1px;
+    background: var(--borde);
+    margin: 30px 0;
+}
+
+.hero-descripcion {
+    max-width: 500px;
+    color: var(--gris);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.hero-acciones {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.hero-boton {
+    padding: 15px 25px;
+    border: 1px solid var(--azul);
+    color: var(--azul);
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.hero-boton:hover {
+    background: var(--azul);
+    color: #000;
+}
+
+.hero-link {
+    color: var(--gris);
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.hero-link:hover {
+    color: var(--blanco);
+}
+
+
+/* esta es la parte del personaje */
+/* esta parte es la que agregue para usar el personaje animado */
+
+.personaje-container {
+    position: relative;
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.personaje {
+    position: relative;
+    z-index: 2;
+    width: min(500px, 80%);
+    max-height: 600px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.2));
+    transition: transform 0.15s ease-out;
+}
+
+.personaje-glow {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: var(--azul);
+    filter: blur(150px);
+    opacity: 0.12;
+}
+
+.personaje-grid {
+    opacity: 0.3;
+}
+
+.personaje-label {
+    position: absolute;
+    right: 5%;
+    bottom: 15%;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+}
+
+.personaje-label span {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.personaje-label small {
+    color: var(--gris);
+    letter-spacing: 2px;
+}
+
+
+/* este seria todo el hero */
+
+.hero-bottom {
+    position: absolute;
+    bottom: 30px;
+    left: 8%;
+    right: 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gris);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.hero-scroll-line {
+    width: 100px;
+    height: 1px;
+    background: var(--gris-oscuro);
+}
+
+
+/* la division de secciones */
+
+section:not(#inicio) {
+    padding: 150px 8%;
+    position: relative;
+}
+
+.section-header {
+    margin-bottom: 80px;
+}
+
+.section-header h2 {
+    font-size: clamp(45px, 7vw, 100px);
+    letter-spacing: -5px;
+    line-height: 0.9;
+    margin: 15px 0;
+}
+
+.section-header p {
+    color: var(--gris);
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+
+/* diseño de la seccion sobre mi */
+
+.sobre-mi-contenido {
+    max-width: 1400px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 100px;
+    align-items: center;
+}
+
+.sobre-mi-texto {
+    max-width: 700px;
+}
+
+.sobre-mi-texto p {
+    color: var(--gris);
+    line-height: 1.8;
+    margin: 25px 0;
+}
+
+.sobre-mi-texto .texto-grande {
+    font-size: 28px;
+    color: var(--blanco);
+    line-height: 1.4;
+}
+
+.sobre-mi-texto strong {
+    color: var(--azul);
+}
+
+.sobre-mi-imagen {
+    display: flex;
+    justify-content: center;
+}
+
+.imagen-marco {
+    width: 350px;
+    height: 450px;
+    position: relative;
+    border: 1px solid var(--borde);
+    padding: 10px;
+}
+
+.imagen-marco img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagen-numero {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    background: var(--azul);
+    color: #000;
+    padding: 10px 15px;
+    font-weight: 700;
+}
+
+
+/* diseño de habilidades */
+/* aca están las tarjetas de las tecnologias que fui aprendiendo */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.skill-card {
+    padding: 30px;
+    min-height: 300px;
+    border: 1px solid var(--borde);
+    background: var(--fondo-secundario);
+    transition: 0.3s;
+}
+
+.skill-card:hover {
+    border-color: var(--azul);
+    transform: translateY(-5px);
+}
+
+.skill-top {
+    display: flex;
+    justify-content: space-between;
+    color: var(--gris);
+}
+
+.skill-top i {
+    font-size: 25px;
+    color: var(--azul);
+}
+
+.skill-card h3 {
+    margin: 60px 0 15px;
+    font-size: 28px;
+}
+
+.skill-card p {
+    color: var(--gris);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.skill-bar {
+    height: 2px;
+    background: var(--gris-oscuro);
+    margin-top: 30px;
+}
+
+.skill-bar span {
+    display: block;
+    height: 100%;
+    background: var(--azul);
+}
+
+.skill-card small {
+    display: block;
+    margin-top: 10px;
+    color: var(--gris);
+}
+
+
+/* diseño de proyectos */
+
+.proyectos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.proyecto-card {
+    border: 1px solid var(--borde);
+    background: var(--fondo-secundario);
+    transition: 0.3s;
+}
+
+.proyecto-card:hover {
+    border-color: var(--azul);
+}
+
+.proyecto-imagen {
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.proyecto-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.proyecto-card:hover .proyecto-imagen img {
+    transform: scale(1.05);
+}
+
+.proyecto-numero {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 12px;
+    color: var(--azul);
+}
+
+.proyecto-overlay {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--azul);
+    color: var(--azul);
+}
+
+.proyecto-info {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.proyecto-info h3 {
+    margin: 10px 0;
+}
+
+.proyecto-info p {
+    color: var(--gris);
+    font-size: 14px;
+}
+
+.proyecto-link {
+    white-space: nowrap;
+    color: var(--azul);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+
+/* diseño de la seccion contacto */
+
+#contacto {
+    text-align: center;
+}
+
+.contacto-contenido {
+    max-width: 900px;
+    margin: auto;
+}
+
+.contacto-mini {
+    margin-top: 30px;
+    color: var(--gris);
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+.contacto-contenido h2 {
+    font-size: clamp(60px, 10vw, 150px);
+    letter-spacing: -7px;
+    margin: 20px 0;
+}
+
+.contacto-descripcion {
+    max-width: 500px;
+    margin: auto;
+    color: var(--gris);
+}
+
+.redes-sociales {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 50px auto 0;
+}
+
+.redes-sociales a {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--borde);
+    color: var(--gris);
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.redes-sociales a:hover {
+    color: var(--azul);
+    border-color: var(--azul);
+    transform: translateY(-5px);
+}
+
+
+/* esto es parte del diseño del footer */
+
+footer {
+    padding: 30px 8%;
+    border-top: 1px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    color: var(--gris);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.footer-right {
+    font-weight: 700;
+}
+
+/* Esto adapta la pagina cuando la pantalla es mas chica, como para cuando abris la pagina desde el celular */
+@media (max-width: 900px) {
+
+    header {
+        padding: 20px;
+    }
+
+    .nav {
+        gap: 10px;
+    }
+
+    .header-status {
+        display: none;
+    }
+
+    .hero-contenido,
+    .sobre-mi-contenido {
+        grid-template-columns: 1fr;
+    }
+
+    .personaje-container {
+        height: 450px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .proyectos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .nav {
+        display: none;
+    }
+
+    #inicio,
+    section:not(#inicio) {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .hero-texto h1 {
+        font-size: 60px;
+        letter-spacing: -4px;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .proyecto-info {
+        flex-direction: column;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+}
+
+/* MODO CLARO / OSCURO */
+
+body {
+    background: #ffffff;
+    color: #000000;
+}
+
+body.modo-oscuro {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Fondos principales */
+body.modo-oscuro main,
+body.modo-oscuro header,
+body.modo-oscuro footer,
+body.modo-oscuro section,
+body.modo-oscuro #inicio {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Tarjetas */
+body.modo-oscuro .skill-card,
+body.modo-oscuro .proyecto-card {
+    background-color: #0a0a0a !important;
+    color: #ffffff !important;
+}
+
+/* Textos */
+body.modo-oscuro h1,
+body.modo-oscuro h2,
+body.modo-oscuro h3,
+body.modo-oscuro p,
+body.modo-oscuro span,
+body.modo-oscuro a,
+body.modo-oscuro li {
+    color: #ffffff !important;
+}
+
+/* Mantener detalles azules */
+body.modo-oscuro .hero-numero,
+body.modo-oscuro .section-numero,
+body.modo-oscuro .mini-titulo,
+body.modo-oscuro .proyecto-tipo,
+body.modo-oscuro .proyecto-link,
+body.modo-oscuro .hero-boton {
+    color: var(--azul) !important;
+}
+
+/* Quitar el azul gigante del brillo */
+body.modo-oscuro .personaje-glow {
+    background: #ffffff !important;
+    opacity: 0.03 !important;
+}
+
+/* Botón */
+.header-derecha {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.modo-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.modo-btn:hover {
+    transform: scale(1.1);
+}
+/* MODO CLARO */
+
+body:not(.modo-oscuro) {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+body:not(.modo-oscuro) header,
+body:not(.modo-oscuro) footer,
+body:not(.modo-oscuro) section,
+body:not(.modo-oscuro) #inicio {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* Títulos y textos */
+body:not(.modo-oscuro) h1,
+body:not(.modo-oscuro) h2,
+body:not(.modo-oscuro) h3,
+body:not(.modo-oscuro) p,
+body:not(.modo-oscuro) li,
+body:not(.modo-oscuro) a,
+body:not(.modo-oscuro) .logo,
+body:not(.modo-oscuro) .nav-link,
+body:not(.modo-oscuro) .hero-texto,
+body:not(.modo-oscuro) .section-header,
+body:not(.modo-oscuro) .sobre-mi-texto,
+body:not(.modo-oscuro) .skill-card,
+body:not(.modo-oscuro) .proyecto-card,
+body:not(.modo-oscuro) .contacto-contenido,
+body:not(.modo-oscuro) footer {
+    color: #111111 !important;
+}
+
+/* Textos secundarios */
+body:not(.modo-oscuro) .hero-descripcion,
+body:not(.modo-oscuro) .section-header p,
+body:not(.modo-oscuro) .sobre-mi-texto p,
+body:not(.modo-oscuro) .skill-card p,
+body:not(.modo-oscuro) .skill-card small,
+body:not(.modo-oscuro) .proyecto-info p,
+body:not(.modo-oscuro) .contacto-descripcion,
+body:not(.modo-oscuro) .contacto-mini,
+body:not(.modo-oscuro) .header-status {
+    color: #555555 !important;
+}
+
+/* Tarjetas */
+body:not(.modo-oscuro) .skill-card,
+body:not(.modo-oscuro) .proyecto-card {
+    background: #f5f5f5 !important;
+}
+
+/* Header */
+body:not(.modo-oscuro) header {
+    background: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Mantener azul */
+body:not(.modo-oscuro) .hero-numero,
+body:not(.modo-oscuro) .section-numero,
+body:not(.modo-oscuro) .mini-titulo,
+body:not(.modo-oscuro) .proyecto-tipo,
+body:not(.modo-oscuro) .proyecto-link,
+body:not(.modo-oscuro) .hero-boton,
+body:not(.modo-oscuro) .skill-top i {
+    color: var(--azul) !important;
+}

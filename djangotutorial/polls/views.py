@@ -1,9 +1,13 @@
 from django.http import HttpResponse
 from django.views import generic
 from django.utils import timezone
-
+from django.shortcuts import render
 from .models import Question
+from .models import Post
 
+def blog(request):
+    posts = Post.objects.order_by("-fecha")
+    return render(request, "blog.html", {"posts": posts})
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
@@ -34,3 +38,6 @@ def vote(request, question_id):
     return HttpResponse(
         f"Estás votando sobre la pregunta {question_id}."
     )
+
+def portfolio(request):
+    return render(request, 'index.html')

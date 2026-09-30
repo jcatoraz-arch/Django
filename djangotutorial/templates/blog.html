@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog - Joaquin Catoraz</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+
+    <h1>Mi Blog</h1>
+
+    {% if posts %}
+        {% for post in posts %}
+            <article>
+                <h2>{{ post.titulo }}</h2>
+                <p>{{ post.contenido }}</p>
+                <small>{{ post.fecha }}</small>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>Todavía no hay publicaciones.</p>
+    {% endif %}
+
+</body>
+</html>
