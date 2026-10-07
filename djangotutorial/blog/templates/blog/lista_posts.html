@@ -47,7 +47,19 @@
                     <a href="{% url 'blog:filtrar_categoria' post.categoria %}">
                         #{{ post.categoria }}
                     </a>
+                    {% if post.id in likes %}
+                    <a href="{% url 'blog:dar_like' post.id %}"
+                    style="display: inline-block; margin-top: 10px; padding: 8px 14px; background: #151515; border: 1px solid #ff4d4d; border-radius: 10px; color: #ff4d4d; text-decoration: none;">
+                        ❤️ {{ post.likes }}
+                    </a>
+                {% else %}
+                    <a href="{% url 'blog:dar_like' post.id %}"
+                    style="display: inline-block; margin-top: 10px; padding: 8px 14px; background: #151515; border: 1px solid #555; border-radius: 10px; color: #888; text-decoration: none;">
+                        ❤️ {{ post.likes }}
+                    </a>
+                {% endif %}
                 </p>
+            
             </article>
         {% empty %}
             <p>No hay publicaciones todavía.</p>

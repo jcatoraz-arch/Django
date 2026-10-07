@@ -17,6 +17,7 @@
     </nav>
 
     <main>
+
         <article>
             <h1>{{ post.titulo }}</h1>
 
@@ -34,13 +35,27 @@
 
             {% for comentario in comentarios %}
                 <div class="comentario">
+
                     <strong>{{ comentario.nombre }}</strong>
+
+                    {% if user.is_staff %}
+                        <form method="post" action="{% url 'blog:eliminar_comentario' comentario.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="float: right; background: none; border: none; color: #ff4d4d; font-size: 20px; cursor: pointer;">
+                                ×
+                            </button>
+                        </form>
+                    {% endif %}
+
                     <p>{{ comentario.texto }}</p>
                     <small>{{ comentario.fecha }}</small>
+
                 </div>
+
             {% empty %}
                 <p>No hay comentarios todavía.</p>
             {% endfor %}
+
         </section>
 
         <section>
@@ -54,22 +69,24 @@
                 <textarea name="texto" placeholder="Tu comentario" required></textarea>
 
                 <button type="submit">Comentar</button>
-            </form> <!-- crea el formulario para que cualquier visitante pueda dejar nombre y comentario-->
+            </form>
         </section>
 
         <a href="{% url 'blog:lista_posts' %}">← Volver al blog</a>
+
     </main>
+
     <footer>
         <p>© 2026 Joaquin Catoraz</p>
         <p>
-            <a href="mailto:TU_MAIL">jcatoraz@gmail.com</a>
+            <a href="mailto:jcatoraz@gmail.com">jcatoraz@gmail.com</a>
             |
             <a href="https://github.com/jcatoraz-arch" target="_blank">GitHub</a>
         </p>
     </footer>
 
 </body>
-</html> 
+</html>
 <!-- muestra el post completo en su propia pagina-->
 
 <!-- deja la pagina individual con el mismo estilo general, muestra los comentarios y mantiene el formulario funcionando
