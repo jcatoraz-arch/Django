@@ -85,4 +85,12 @@ button {
     border-radius: 8px;
     cursor: pointer;
 }
+footer {
+    text-align: center;
+    margin-top: 60px;
+    padding: 25px;
+    border-top: 1px solid #333;
+    color: #888;
+    font-size: 14px;
+}
 /* use la misma idea visual de mi portfolio
