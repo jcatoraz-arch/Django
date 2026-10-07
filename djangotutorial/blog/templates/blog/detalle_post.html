@@ -1,23 +1,67 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{{ post.titulo }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.titulo }} | Blog</title>
+    <link rel="stylesheet" href="{% static 'blog/styles.css' %}">
 </head>
+
 <body>
 
-    <h1>{{ post.titulo }}</h1>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="{% url 'blog:lista_posts' %}">Blog</a>
+    </nav>
 
-    <p>{{ post.fecha }}</p>
+    <main>
+        <article>
+            <h1>{{ post.titulo }}</h1>
 
-    {% if post.imagen %}
-        <img src="{{ post.imagen.url }}" width="500">
-    {% endif %}
+            <small>{{ post.fecha }}</small>
 
-    <p>{{ post.texto }}</p>
+            {% if post.imagen %}
+                <img src="{{ post.imagen.url }}">
+            {% endif %}
 
-    <a href="{% url 'blog:lista_posts' %}">Volver al blog</a>
+            <p>{{ post.texto }}</p>
+        </article>
+
+        <section>
+            <h2>Comentarios</h2>
+
+            {% for comentario in comentarios %}
+                <div class="comentario">
+                    <strong>{{ comentario.nombre }}</strong>
+                    <p>{{ comentario.texto }}</p>
+                    <small>{{ comentario.fecha }}</small>
+                </div>
+            {% empty %}
+                <p>No hay comentarios todavía.</p>
+            {% endfor %}
+        </section>
+
+        <section>
+            <h2>Dejá un comentario</h2>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <input type="text" name="nombre" placeholder="Tu nombre" required>
+
+                <textarea name="texto" placeholder="Tu comentario" required></textarea>
+
+                <button type="submit">Comentar</button>
+            </form> <!-- crea el formulario para que cualquier visitante pueda dejar nombre y comentario-->
+        </section>
+
+        <a href="{% url 'blog:lista_posts' %}">← Volver al blog</a>
+    </main>
 
 </body>
-</html>
+</html> 
 <!-- muestra el post completo en su propia pagina-->
+
+<!-- deja la pagina individual con el mismo estilo general, muestra los comentarios y mantiene el formulario funcionando
