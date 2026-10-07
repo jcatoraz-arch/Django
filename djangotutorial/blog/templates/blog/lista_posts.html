@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+
+    <h1>Mi Blog</h1>
+
+    {% for post in posts %}
+        <h2>{{ post.titulo }}</h2>
+        <p>{{ post.texto }}</p>
+        <p>{{ post.fecha }}</p>
+
+        {% if post.imagen %}
+            <img src="{{ post.imagen.url }}" width="300">
+        {% endif %}
+
+        <hr>
+    {% endfor %}
+
+</body>
+</html>
+<!-- muestra todos los posts que creamos desde la carpeta admin, incluyendo titulo, texto, fecha e imagen-->
